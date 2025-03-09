@@ -1,0 +1,1 @@
+This repo contains all my notes while preparing for the Certified Kubernetes Application Developer (CKAD) exam.
