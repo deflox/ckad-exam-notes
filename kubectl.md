@@ -1,5 +1,3 @@
-* https://kubernetes.io/docs/reference/kubernetes-api/
-* https://github.com/dgkanatsios/CKAD-exercises/tree/main
 * https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
 
 # Useful flags:
@@ -12,19 +10,49 @@
 * `--as` can be added to any user to perform the operation with this user
 * `-l <label>` can be used to filter object by label
 * `--show-labels`: 
+* `man 5 crontab`: to view documentation for crontab expressions
 
 # Shortcuts
-* po for POD
-* rs for ReplicaSet
-* deploy for Deployments
-* svc for Service
-* ns for Namespaces
-* netpol for Network Policy
-* pv for Persistent Volumes
-* pvc for Persistent Volume Claims
-* sa for Service Accounts
+* `po` for POD
+* `rs` for ReplicaSet
+* `deploy` for Deployments
+* `svc` for Service
+* `ns` for Namespaces
+* `netpol` for Network Policy
+* `pv` for Persistent Volumes
+* `pvc` for Persistent Volume Claims
+* `sa` for Service Accounts
 
-`man 5 crontab` -> fron cron expression
+# Difference between `apply`, `patch`, `replace`, `edit`:
+* `replace -f <file>`: Will completely replace the whole object with the contents of the specified file, so every attribute that was not specified explicitly in the file will be lost if it did already exist.
+* `apply -f <file>`: Will apply changes to the object by merging the contents of the input file with the attribute contents of the target object:
+  * Attribute missing in the file but present on the object → Not touched
+  * Attribute present in both file & object → Updated to match the file
+  * Attribute present in the file but missing in the object → Added to the object
+  * Attribute missing in both file & object → No change
+* `edit <resource> <name>`: Will open an editor with all current attributes and their values of the object. 
+  * If you REMOVE an attribute → It will be removed from the object.
+  * If you ADD a new attribute → It will be added to the object.
+  * If you MODIFY an existing attribute → It will be updated accordingly.
+* `path`: Allows only updating a targeted set of attributes and their values. The input works best in JSON format, because JSON can be flatlined to just one string. But YAML is theoretically also possible:
+  * `kubectl patch deployment my-deployment -p '{"spec": {"template": {"spec": {"containers": [{"name": "my-app", "resources": {"limits": {"cpu": "500m"}}}]}}}}'`
+  * `kubectl patch deployment my-deployment -p "$(cat patch.yaml)"`
+
+# Imperative Commands
+```bash
+# create a pod with image nginx
+k run pod-name --image=nginx
+
+# create a replicaset
+# currently not possible imperatively
+
+# create a deployment images nginx and 3 replicas
+kubectl create deployment deployment-name --image=nginx --replicas=3
+
+# create services
+k create service (clusterip|loadbalancer|nodeport) service-naem
+
+```
 
 # Expose
 

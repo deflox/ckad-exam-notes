@@ -3,10 +3,15 @@
 * POD Yaml file: https://kubernetes.io/docs/concepts/workloads/pods/#using-pods
 * https://medium.com/@pranay.shah/nano-text-editor-tricks-for-ckad-exam-3b07f80dfe77
 * https://kubernetes.io/docs/reference/kubectl/quick-reference/
+* https://kubernetes.io/docs/reference/kubernetes-api/
 
+## Exam Tips
 * https://www.youtube.com/watch?v=tS2S926PriQ
 * https://www.youtube.com/watch?v=2T86xAtR6Fo
 * https://www.youtube.com/watch?v=rnemKrveZks
+
+## More Exercises
+* https://github.com/dgkanatsios/CKAD-exercises/tree/main
 
 ## Documentation:
 * CLI Reference: https://kubernetes.io/docs/reference/kubectl/
@@ -149,17 +154,3 @@ kubectl expose pod hello-pod --name=hello-svc --target-port=8080 --type=NodePort
 * Are controlling pods in the cluster and ensuring that they are fail-safe meaning if a pod fails, a new instance is created automatically
 * Are almost the same but ReplicaSet requires a `selector` definition while it is optional for ReplicaController
 * Api-Version for ReplicaSet is `apps/v1`
-```
-## 
-
-```
-
-# Namespaces
-
-# 
-
-# Links
-* Service Discovery: https://nigelpoulton.com/demystifying-kubernetes-service-discovery/
-* https://www.nigelpoulton.com/post/demystifying-kubernetes-service-discovery
-
-
