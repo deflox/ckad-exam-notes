@@ -39,6 +39,9 @@
   * `kubectl patch deployment my-deployment -p "$(cat patch.yaml)"`
 
 # Imperative Commands
+* Objects without imparative commands:
+  * PersistentVolumeClaim
+  * PersistentVolume
 ```bash
 # create a pod with image nginx
 k run pod-name --image=nginx
@@ -52,7 +55,20 @@ kubectl create deployment deployment-name --image=nginx --replicas=3
 # create services
 k create service (clusterip|loadbalancer|nodeport) service-naem
 
+# create role
+kubectl create role developer-role --verb=get --resource=pods
+
+# create rolebinding
+
+# create new user in kubeconfig
+kubectl config set-credentials martin --client-key=/root/martin.key --client-certificate=/root/martin.crt
+
+# create context binding
+k config set-context developer --cluster=kubernetes --user=martin
 ```
+
+# Vi/Vim
+* `:u` undo last command
 
 # Expose
 

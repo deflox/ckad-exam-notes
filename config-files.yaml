@@ -1,0 +1,94 @@
+--
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-rolebinding
+  namespace: development
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: developer-role
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: martin
+--
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jekyll
+  namespace: development
+  labels:
+    run: jekyll
+spec:
+  volumes:
+  - name: site
+    persistentVolumeClaim:
+      claimName: jekyll-site
+  containers:
+  - name: jekyll
+    image: gcr.io/kodekloud/customimage/jekyll-serve
+    volumeMounts:
+    - mountPath: /site
+      name: site
+  initContainers:
+  - name: copy-jekyll-site
+    image: gcr.io/kodekloud/customimage/jekyll
+    command: ["jekyll", "new", "/site"]
+    volumeMounts:
+    - mountPath: /site
+      name: site
+--
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jekyll-site
+  namespace: development
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: local-storage
+--
+apiVersion: v1
+kind: Service
+metadata:
+  name: jekyll
+  namespace: development
+spec:
+  ports:
+  - name: 5678-8080
+    port: 8080
+    targetPort: 4000
+    nodePort: 30097
+  selector:
+    run: jekyll
+  type: NodePort
+--
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer-role
+  namespace: development
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - "*"
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumeclaims
+  verbs:
+  - "*"
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - "*"

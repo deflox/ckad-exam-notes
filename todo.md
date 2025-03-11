@@ -23,3 +23,8 @@
 * Read and understand: https://www.nigelpoulton.com/post/demystifying-kubernetes-service-discovery
 * Read through certificate tips from udemy course
 * Document where one can find examples for YAML definitions in documentation.
+* Are multiple terminals possible in exam?
+* `storageClassName` was not discussed in lecture? Is it always StoreClass?
+* Permantely switch namespace?
+* https://linuxcommand.org/tlcl.php
+* Worth considering? https://learn.kodekloud.com/user/courses/ultimate-certified-kubernetes-application-developer-ckad-mock-exam-series?title=Ultimate
