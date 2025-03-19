@@ -5,6 +5,11 @@
 * https://kubernetes.io/docs/reference/kubectl/quick-reference/
 * https://kubernetes.io/docs/reference/kubernetes-api/
 
+## Linux Foundation Exam Envionrments
+* https://docs.linuxfoundation.org/tc-docs/certification/lf-handbook2/candidate-requirements
+* https://docs.linuxfoundation.org/tc-docs/certification/faq-cka-ckad-cks
+* https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad
+
 ## Exam Tips
 * https://www.youtube.com/watch?v=tS2S926PriQ
 * https://www.youtube.com/watch?v=2T86xAtR6Fo

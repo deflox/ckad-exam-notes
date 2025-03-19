@@ -28,3 +28,9 @@
 * Permantely switch namespace?
 * https://linuxcommand.org/tlcl.php
 * Worth considering? https://learn.kodekloud.com/user/courses/ultimate-certified-kubernetes-application-developer-ckad-mock-exam-series?title=Ultimate
+* VI how to delete line till end
+  * how to delete everything following afterwards
+* Can you not edit an replicaset with `k edit`?
+  * Answer: Yes you can. But you need to manually delete the pods so that the replicaset recreates them automatically
+* Can I force delete at the exam?
+* Watch solving of the mock exam.

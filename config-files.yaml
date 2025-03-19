@@ -1,4 +1,4 @@
---
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -12,7 +12,7 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: User
   name: martin
---
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -38,7 +38,7 @@ spec:
     volumeMounts:
     - mountPath: /site
       name: site
---
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -67,7 +67,7 @@ spec:
   selector:
     run: jekyll
   type: NodePort
---
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -92,3 +92,33 @@ rules:
   - services
   verbs:
   - "*"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  creationTimestamp: null
+  name: ingress-vh-routing
+spec:
+  rules:
+  - host: watch.ecom-store.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: video-service
+            port:
+              number: 8080
+        path: /video
+        pathType: Exact
+  - host: apparels.ecom-store.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: apparels-service
+            port:
+              number: 8080
+        path: /wear
+        pathType: Exact

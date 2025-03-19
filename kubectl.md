@@ -8,7 +8,7 @@
 * `-A` shows all objects regardless of namespace
 * `k api-resources` show resource names and their aliases
 * `--as` can be added to any user to perform the operation with this user
-* `-l <label>` can be used to filter object by label
+* `-l <label>` can be used to filter object by label. can also be used to label a pod when using `kubectl run`
 * `--show-labels`: 
 * `man 5 crontab`: to view documentation for crontab expressions
 
@@ -71,7 +71,7 @@ k config set-context developer --cluster=kubernetes --user=martin
 * `:u` undo last command
 
 # Expose
-
+* Can be used to expose either pods or services
 ```
 kubectl expose pod redis --port=6379 --name=redis-service
 ```
@@ -116,6 +116,7 @@ kubectl run webapp-green --image="kodekloud/webapp-color" --dry-run=client -o ya
 ## Scale
 
 ## Logs
+* Prints logs of a container that are written to stdout and stderr
 ```
 kubectl logs -f <podname> # -f will show live logs
 ```
