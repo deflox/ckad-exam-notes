@@ -9,7 +9,7 @@
 * `k api-resources` show resource names and their aliases
 * `--as` can be added to any user to perform the operation with this user
 * `-l <label>` can be used to filter object by label. can also be used to label a pod when using `kubectl run`
-* `--show-labels`: 
+* `--show-labels`: E.g. print an object with get and also get the labels of the object `kubectl get node node01 --show-labels`
 * `man 5 crontab`: to view documentation for crontab expressions
 
 # Shortcuts
@@ -39,6 +39,9 @@
   * `kubectl patch deployment my-deployment -p "$(cat patch.yaml)"`
 
 # Imperative Commands
+* Labelling is only possible imperatvely:
+  * `kubectl run`
+* Check on which node pod is deployed: `kubectl ge tpod -o wide`
 * Objects without imparative commands:
   * PersistentVolumeClaim
   * PersistentVolume
@@ -65,6 +68,10 @@ kubectl config set-credentials martin --client-key=/root/martin.key --client-cer
 
 # create context binding
 k config set-context developer --cluster=kubernetes --user=martin
+
+
+kubectl expose deployment my-webapp --name front-end-service --type NodePort --port 80
+kubectl create ingress ingress-name --rule="domain.com/path/*=service-name:service-port"
 ```
 
 # Vi/Vim

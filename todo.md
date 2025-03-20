@@ -34,3 +34,7 @@
   * Answer: Yes you can. But you need to manually delete the pods so that the replicaset recreates them automatically
 * Can I force delete at the exam?
 * Watch solving of the mock exam.
+* requiredDuringSchedulingIgnoredDuringExecution 
+* ["/bin/sh", "-c", "sleep 4800"] vs ["sleep", "4800"]
+* https://www.udemy.com/course/certified-kubernetes-application-developer/learn/lecture/26359180#questions/15546554
+* Access this killer.sh

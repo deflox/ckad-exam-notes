@@ -14,9 +14,11 @@
 * https://www.youtube.com/watch?v=tS2S926PriQ
 * https://www.youtube.com/watch?v=2T86xAtR6Fo
 * https://www.youtube.com/watch?v=rnemKrveZks
+* https://www.udemy.com/course/certified-kubernetes-application-developer/learn/lecture/26359180#questions/22101801
 
 ## More Exercises
 * https://github.com/dgkanatsios/CKAD-exercises/tree/main
+* https://learn.kodekloud.com/user/courses/ultimate-certified-kubernetes-application-developer-ckad-mock-exam-series
 
 ## Documentation:
 * CLI Reference: https://kubernetes.io/docs/reference/kubectl/
