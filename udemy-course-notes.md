@@ -1,3 +1,6 @@
+- [Core Concepts](#core-concepts)
+  - [RepliacaController/ReplicaSet](#repliacacontrollerreplicaset)
+  - [Namespaces](#namespaces)
 - [Multi-Container Pods](#multi-container-pods)
   - [Init Containers](#init-containers)
 - [Observability](#observability)
@@ -36,6 +39,21 @@
   - [Operator Framework](#operator-framework)
 - [Helm](#helm)
   - [Concepts](#concepts)
+
+# Core Concepts
+
+## RepliacaController/ReplicaSet
+* https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+* Are controlling pods in the cluster and ensuring that they are fail-safe meaning if a pod fails, a new instance is created automatically
+* Are almost the same but ReplicaSet requires a `selector` definition while it is optional for ReplicaController
+* Api-Version for ReplicaSet is `apps/v1`
+
+## Namespaces
+* Used to group different items within a cluster
+* Kuberenetes creates a "Default" namespace by default
+* Other namespaces: `kube-system` and `kube-public`
+* Assign quotes to namespaces
+* Namespaces can be defined in the metadata section of an object definition
 
 # Multi-Container Pods
 * Sidecar Pattern: Logging-Agent alongside Webserver. 
@@ -159,6 +177,7 @@ kubectl edit deployment # komplettes deployment editieren
 * We do not need a separate rule for responses because once a request is allowed the response is automatically allowed too
 * Once we assign a NetworkPolicy to a POD, this POD will not be able to communicate at all with anyone nor can the pod receive any requests
 * It is also possible to allow connections comming directly from IP addresses
+* Network Policys relie on the network solutions that kubernetes uses and some do not support Network Policies
 
 ```
 payroll-service.default.svc.cluster.local

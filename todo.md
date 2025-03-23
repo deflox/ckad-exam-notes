@@ -4,9 +4,7 @@
 * How to edit an existing deployment?
 * Taunts and Node Affinity (what happens to existing nodes)
 * How to switch namespace permanently?
-* Difference between 
 * Implication of using `kubectl set image deployment/myapp-deployment <new-image-version>` to update a deployment
-* Why in for NetworkPolicy can I use either `-` or not?
 * Where to find templates for YAML fines in doc?
 * `kubeadm`
 * Questions directly in notes of udemy course.
@@ -16,7 +14,6 @@
   * Role's are only created in a namespace and therefore also only control access in this namespace
 * When I can "" be set for GroupAPI?
 * Different types of Secrets?
-* YAML practice at KodeKloud
 * Practice:
   * Blue-Green Deployment
   * Secret ConfigMaps
@@ -32,9 +29,6 @@
   * how to delete everything following afterwards
 * Can you not edit an replicaset with `k edit`?
   * Answer: Yes you can. But you need to manually delete the pods so that the replicaset recreates them automatically
-* Can I force delete at the exam?
-* Watch solving of the mock exam.
 * requiredDuringSchedulingIgnoredDuringExecution 
 * ["/bin/sh", "-c", "sleep 4800"] vs ["sleep", "4800"]
 * https://www.udemy.com/course/certified-kubernetes-application-developer/learn/lecture/26359180#questions/15546554
-* Access this killer.sh

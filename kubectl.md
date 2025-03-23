@@ -1,4 +1,5 @@
 * https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+* https://kubernetes.io/docs/reference/kubectl/quick-reference/
 
 # Useful flags:
 * `--all-namespaces`: show things/resources in all namespaces at once
@@ -82,6 +83,8 @@ kubectl create ingress ingress-name --rule="domain.com/path/*=service-name:servi
 ```
 kubectl expose pod redis --port=6379 --name=redis-service
 ```
+# `kubectl set`
+* Allows 
 
 # Describe
 
