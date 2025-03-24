@@ -12,6 +12,8 @@
 * `-l <label>` can be used to filter object by label. can also be used to label a pod when using `kubectl run`
 * `--show-labels`: E.g. print an object with get and also get the labels of the object `kubectl get node node01 --show-labels`
 * `man 5 crontab`: to view documentation for crontab expressions
+* `-w` watch results of a kubectl command
+* `--rm` immediately destroy pod after creation (e.g. for busybox)
 
 # Shortcuts
 * `po` for POD
@@ -129,6 +131,9 @@ kubectl run webapp-green --image="kodekloud/webapp-color" --dry-run=client -o ya
 * Prints logs of a container that are written to stdout and stderr
 ```
 kubectl logs -f <podname> # -f will show live logs
+
+# show logs of a previous instance of a pod
+kubectl logs nginx -p
 ```
 
 ## Rollout
