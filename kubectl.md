@@ -14,6 +14,11 @@
 * `man 5 crontab`: to view documentation for crontab expressions
 * `-w` watch results of a kubectl command
 * `--rm` immediately destroy pod after creation (e.g. for busybox)
+* `-L` allows displaying labels als columns with the `kubectl get` command
+
+```
+k get pod -l "app in (v1,v2)"
+```
 
 # Shortcuts
 * `po` for POD
@@ -48,9 +53,13 @@
 * Objects without imparative commands:
   * PersistentVolumeClaim
   * PersistentVolume
+  * LimitRange
 ```bash
 # create a pod with image nginx
 k run pod-name --image=nginx
+
+# create job
+k create job <name> --image=<image> -- <command>
 
 # create a replicaset
 # currently not possible imperatively
@@ -72,10 +81,36 @@ kubectl config set-credentials martin --client-key=/root/martin.key --client-cer
 # create context binding
 k config set-context developer --cluster=kubernetes --user=martin
 
+# create request quota
+kubectl create quota my-rq --namespace=one --hard=requests.cpu=1,requests.memory=1Gi,limits.cpu=2,limits.memory=2Gi
 
 kubectl expose deployment my-webapp --name front-end-service --type NodePort --port 80
 kubectl create ingress ingress-name --rule="domain.com/path/*=service-name:service-port"
+
+# create job from cronjob
+kubectl create job --from=cronjob/sample-cron-job sample-job
 ```
+
+Commands vs. Arguments:
+```bash
+kubectl run <name> --image=<image> --command -- sleep 30
+```
+results in...
+```yaml
+- command:
+    - sleep
+    - "30"
+```
+```bash
+kubectl run <name> --image=<image> -- sleep 30
+```
+results in...
+```yaml
+- args:
+    - sleep
+    - "30"
+```
+... there is no such flag for the kubectl create job command, because there it is always treated as a command
 
 # Vi/Vim
 * `:u` undo last command

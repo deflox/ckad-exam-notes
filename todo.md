@@ -32,3 +32,5 @@
 * requiredDuringSchedulingIgnoredDuringExecution 
 * ["/bin/sh", "-c", "sleep 4800"] vs ["sleep", "4800"]
 * https://www.udemy.com/course/certified-kubernetes-application-developer/learn/lecture/26359180#questions/15546554
+* Difference between RequestQuota and LimitRange
+* "Create a pod with resource requests cpu=0.5, memory=1Gi and limits cpu=1, memory=2Gi in namespace one"

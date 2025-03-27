@@ -14,10 +14,12 @@
 * https://www.youtube.com/watch?v=2T86xAtR6Fo
 * https://www.youtube.com/watch?v=rnemKrveZks
 * https://www.udemy.com/course/certified-kubernetes-application-developer/learn/lecture/26359180#questions/22101801
+* https://github.com/bmuschko/ckad-crash-course#additional-resources
 
 ## More Exercises
 * https://github.com/dgkanatsios/CKAD-exercises/tree/main
 * https://learn.kodekloud.com/user/courses/ultimate-certified-kubernetes-application-developer-ckad-mock-exam-series
+* https://github.com/bmuschko/ckad-crash-course/tree/master/exercises
 
 ## Documentation:
 * Object API: https://kubernetes.io/docs/reference/kubernetes-api/
