@@ -13,4 +13,8 @@ docker image tag <old> <new>
 
 # delete image (only possible if no running container uses this image)
 docker image rm <image-name>
+
+create -> create container without runing
+export -> export running container
+
 ```

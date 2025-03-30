@@ -54,6 +54,8 @@ k get pod -l "app in (v1,v2)"
   * PersistentVolumeClaim
   * PersistentVolume
   * LimitRange
+  * NetworkPolicy
+  * Custom Resource Definition
 ```bash
 # create a pod with image nginx
 k run pod-name --image=nginx
@@ -87,8 +89,17 @@ kubectl create quota my-rq --namespace=one --hard=requests.cpu=1,requests.memory
 kubectl expose deployment my-webapp --name front-end-service --type NodePort --port 80
 kubectl create ingress ingress-name --rule="domain.com/path/*=service-name:service-port"
 
+# create a pod and expose is right away with a ClusterIP service
+kubectl run nginx --image=nginx --port=80 --expose
+
 # create job from cronjob
 kubectl create job --from=cronjob/sample-cron-job sample-job
+
+# expose deployment via clusterip service
+kubectl expose deploy <deploy-name> --port=<port-of-deployment> --targetPort=<exposed-port-of-container>
+
+# expose deployment via nodeport service
+kubectl expose deploy <deploy-name> --port=<port-of-deployment> --targetPort=<exposed-port-of-container> --type='NodePort'
 ```
 
 Commands vs. Arguments:
@@ -112,6 +123,14 @@ results in...
 ```
 ... there is no such flag for the kubectl create job command, because there it is always treated as a command
 
+
+Parsing of Commands and Arguments
+* If you'd like to execute multiple command inside a busybox container like `echo hello;sleep 30;echo world` then you need to do it like so: `/bin/sh -c 'echo hello;sleep 10;echo world'` imperatively because otherwise the command would be executed in your own shell.
+* Only doing `'echo hello;sleep 10;echo world'` will also not work because then kubernetes completely overrides 
+
+Works: `k run busybox --image=busybox $do --command -- /bin/sh -c 'echo hello;sleep 10;echo world'`
+
+
 # Vi/Vim
 * `:u` undo last command
 
@@ -134,6 +153,9 @@ kubectl expose pod redis --port=6379 --name=redis-service
 # Taint
 
 # Label
+
+# Events
+* Get events that happened in the cluster
 
 # Get
 ```
