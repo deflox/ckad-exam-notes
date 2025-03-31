@@ -1,0 +1,1 @@
+* `Ctrl+K` to delete till end of line
