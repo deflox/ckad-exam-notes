@@ -39,6 +39,16 @@
   - [Operator Framework](#operator-framework)
 - [Helm](#helm)
   - [Concepts](#concepts)
+- [Kustomize](#kustomize)
+  - [Helm vs. Kustomize](#helm-vs-kustomize)
+  - [Kustomization.yaml](#kustomizationyaml)
+  - [Apply Kustomize output](#apply-kustomize-output)
+  - [apiVersion \& kind](#apiversion--kind)
+  - [Transformers](#transformers)
+    - [Image Transformers](#image-transformers)
+  - [Patches](#patches)
+  - [Overlays](#overlays)
+  - [Components](#components)
 
 # Core Concepts
 
@@ -340,3 +350,96 @@ helm search repo ... # to search repo added
 
 helm install <release> . # to install from local directory (if it has been downloaded before)
 ```
+
+# Kustomize
+* If you want to have different parameters between different staging areas, this may be difficult
+* Kustomize tries to solve this problem: Only create one object (base) and maintain specifics per environment (overlay)
+  * base config: represents configuration that will be identical over all environments
+  * overlay: customize behavior of a config file per environment
+
+## Helm vs. Kustomize
+* Helm can achieve something similar but is more complex and offers more possibilities
+* YAML files are not valid because they use the Go-Templating variables
+
+## Kustomization.yaml
+* Is not strictly required
+* Defines which files in that folder should be managed by kustomize
+  * Subdirectories are also possible, if you place a kustomization.yaml file in each subdirectory, then you are able to list the subdirectories within the parent kustomization.yaml file
+* And which customizations need to be applied
+
+## Apply Kustomize output
+```
+kubectl apply -k k8s/
+kubectl delete -k k8s/
+
+kustomize build k8s/ | kubectl apply -f -
+kustomize build k8s/ | kubectl delete -f -
+```
+
+## apiVersion & kind
+* Like every other k8s object, there exists apiVersion & kind, which is not required but recommened, in case there are every braking changes
+```
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+```
+
+## Transformers
+* Allow transforming the generated files
+* commonLabel: adds a label to all resources
+* namePrefix/Suffix: Adds common prefix/suffix to all resources
+* Namespace: Common namespace to all resources
+* commonAnnotation: Adds annotation to all kubernetes resources
+  
+### Image Transformers
+```
+images:
+- name: nginx <- name of the image to replace (not the name attribute)
+  newName: nginxHello <- new name of the image
+  newTag: "2.4" <- new tag for the image
+```
+
+## Patches
+* Used to update one specific resource
+* Two kind of patches: `Json-6902 Patch`:
+  * Always contains a target section which defines which object is targeted
+  * And a patch section that contians the actual changes
+  * For patches we always have to use a `|-` symbol after `patch:`
+  * Example where the name is replaced for an object of kind Deployment and name "api-deployment"
+```yaml
+patches:
+- target:
+    kind: Deployment
+    name: api-deployment
+  patch: |- # this could also be a file reference via path: replica-patch.yaml
+  - op: replace # or add or remove
+    path: /metadata/name
+    value: web-deployment
+```
+* and `Strategic Merge Patch`:
+  * We just define exactly which elements we want to replace in the YAML file
+```yaml
+patches:
+- patch: |- # instead you can also provide a list of patch files directly in the yaml array "- label-patch.yaml"
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: api-deployment
+    spec:
+      replicas: 5
+```
+
+## Overlays
+* Standard Folder Structure:
+  * ks8/
+    * base/
+    * overlays/
+      * dev/
+      * prod/
+* The overlays container contains kustomization.yaml files that define how the object should look like per environment
+* This kustomization.yaml file contain patches that are applied
+* The folder can also have resource files that are specific to to this deployment and only exist in that deployment
+
+## Components
+* Group certain configs together so that you can apply them to only a subset of overlays
+* Stored in a separate folder components
+* Can be imported via `component:` in an overlay

@@ -76,3 +76,14 @@ Because the token is not directly associated anymore with a service account. Whe
   * `apps/v1`: `["apps"]`
   * `authorization.k8s.io/v1`: `["authorization.k8s.io"]`
   * `storage.k8s.io/v1`: `["storage.k8s.io"]`
+
+# Can you not edit an replicaset with `k edit`
+
+Yes you can. But you need to manually delete the pods so that the replicaset recreates them automatically.
+
+# Print only certain columns in a get command:
+
+Prints just the name column:
+```
+k get ns -o custom-columns=NAME:.metadata.name
+```
